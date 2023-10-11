@@ -4,20 +4,16 @@ import { useContext } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { UserAuthContext } from '@/context/user-auth'
-import HomePage from '@/pages/home-page'
+import SignInPage from '@/pages/signIn-page'
 
 export default function Page() {
   const userAuthContext = useContext(UserAuthContext)
   const { push } = useRouter()
 
-  if (!userAuthContext?.isLogged) {
-    push('/sign-in')
+  if (userAuthContext?.isLogged) {
+    push('/')
     return
   }
 
-  if (!userAuthContext?.loadedPage) {
-    return <p className="text-red-600">Loading...</p>
-  }
-
-  return <HomePage />
+  return <SignInPage />
 }
